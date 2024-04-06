@@ -1,4 +1,4 @@
-# promtail conf for the raspi
+# promtail conf for the thpad
 
 server:
   http_listen_port: 9080
