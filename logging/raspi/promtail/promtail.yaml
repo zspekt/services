@@ -16,7 +16,7 @@ scrape_configs:
       - targets:
           - localhost
         labels:
-          job: varlogs
+          job: raspiVarLogs
           __path__: /var/log/*log
   - job_name: openWrt
     static_configs:
