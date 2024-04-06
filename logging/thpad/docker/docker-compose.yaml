@@ -1,0 +1,22 @@
+# docker-compose.yml
+
+# for thpad
+
+version: "3"
+services:
+  promtail:
+    image: grafana/promtail:2.9.4
+    volumes:
+      - /var/log:/var/log # system logs
+      - /home/zspekt/.services/logging/thpad/promtail:/etc/promtail # config
+    # ports:
+    #   - "1514:1514" # this is only needed if you are going to send syslogs
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail.yaml
+
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    driver: bridge
