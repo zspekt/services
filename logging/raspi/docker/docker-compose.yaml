@@ -11,7 +11,7 @@ services:
       - /home/zspekt/logging/loki:/tmp/loki
     ports:
       - "3100:3100"
-    restart: unless-stopped
+    restart: always
     command: -config.file=/etc/loki/loki.yaml
   promtail:
     image: grafana/promtail:2.9.4
@@ -21,5 +21,5 @@ services:
       - /home/zspekt/.services/logging/raspi/promtail:/etc/promtail # config
     # ports:
     #   - "1514:1514" # this is only needed if you are going to send syslogs
-    restart: unless-stopped
+    restart: always
     command: -config.file=/etc/promtail/promtail.yaml
