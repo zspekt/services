@@ -1,8 +1,6 @@
 # docker-compose.yml
 
 # for raspi
-
-version: "3"
 services:
   loki:
     image: grafana/loki:2.9.6
@@ -23,3 +21,21 @@ services:
     #   - "1514:1514" # this is only needed if you are going to send syslogs
     restart: always
     command: -config.file=/etc/promtail/promtail.yaml
+
+  tcplogger:
+    image: zspekt/tcplogger:1.0
+    volumes:
+      - /home/zspekt/openWrtLogs:/var/log/openwrt
+    ports:
+      - "56812:8080"
+    restart: always
+    environment:
+      FILENAME: "/var/log/openwrt/openwrt.log"
+      ADDRESS: "0.0.0.0"
+
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    driver: bridge
